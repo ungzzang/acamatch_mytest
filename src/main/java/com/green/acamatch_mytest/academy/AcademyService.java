@@ -49,6 +49,28 @@ public class AcademyService {
     }
 
     public int updAcademy(MultipartFile pic, AcademyUpdateReq req) {
+        // 프로필 사진 처리
+        if (pic != null && !pic.isEmpty()) {
+            String targetDir = String.format("%s/%d", "academy", req.getAcaId());
+            myFileUtils.makeFolders(targetDir);
+
+            String savedFileName = myFileUtils.makeRandomFileName(pic);
+            req.setAcaPic(savedFileName);
+
+            // 기존 파일 삭제
+            String deletePath = String.format("%s/academy/%d", myFileUtils.getUploadPath(), req.getAcaId());
+            myFileUtils.deleteFolder(deletePath, false);
+
+            // 파일 저장
+            String filePath = String.format("%s/%s", targetDir, savedFileName);
+
+            try{
+                myFileUtils.transferTo(pic, filePath);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+
         academyMapper.updAcademy(req);
         return 1;
     }
