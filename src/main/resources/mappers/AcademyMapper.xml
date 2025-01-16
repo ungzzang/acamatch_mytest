@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.green.acamatch_mytest.academy.AcademyMapper">
+
+    <insert id="insAcademy" useGeneratedKeys="true" keyProperty="acaId">
+        INSERT INTO academy
+        SET aca_name = #{acaName}
+          , aca_phone = #{acaPhone}
+          , comment = #{comment}
+          , teacher_num = #{teacherNum}
+          , open_time = #{openTime}
+          , close_time = #{closeTime}
+          , address = #{address}
+          , aca_pic = #{acaPic}
+    </insert>
+
+</mapper>
