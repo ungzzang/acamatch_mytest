@@ -22,29 +22,32 @@
     <update id="updAcademy">
         UPDATE academy
         <set>
-            <if test="acaName != null and acaName = ''">
+            <if test="acaName != null and acaName != ''">
                 aca_name = #{acaName}
             </if>
-            <if test="acaPhone != null and acaPhone = ''">
-                , acaPhone = #{acaPhone}
+            <if test="acaPhone != null and acaPhone != ''">
+                , aca_phone = #{acaPhone}
             </if>
-            <if test="comment != null and comment = ''">
+            <if test="comment != null and comment != ''">
                 , comment = #{comment}
             </if>
-            <if test="teacherNum != null and teacherNum = ''">
-                , teacherNum = #{teacherNum}
+            <if test="teacherNum != null and teacherNum != ''">
+                , teacher_num = #{teacherNum}
             </if>
-            <if test="openTime != null and openTime = ''">
-                , openTime = #{openTime}
+            <if test="openTime != null and openTime != ''">
+                , open_time = #{openTime}
             </if>
-            <if test="closeTime != null and closeTime = ''">
-                , closeTime = #{closeTime}
+            <if test="closeTime != null and closeTime != ''">
+                , close_time = #{closeTime}
             </if>
-            <if test="acaPic != null and acaPic = ''">
-                , acaPic = #{acaPic}
+            <if test="acaPic != null and acaPic != ''">
+                , aca_pic = #{acaPic}
+            </if>
+            <if test="address != null and address != ''">
+                , address = #{address}
             </if>
         </set>
-        WHERE acaId = #{acaId}
+        WHERE aca_id = #{acaId}
     </update>
 
     <delete id="delAcademy">
