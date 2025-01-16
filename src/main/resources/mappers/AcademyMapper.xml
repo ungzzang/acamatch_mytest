@@ -7,14 +7,50 @@
 
     <insert id="insAcademy" useGeneratedKeys="true" keyProperty="acaId">
         INSERT INTO academy
-        SET aca_name = #{acaName}
-          , aca_phone = #{acaPhone}
-          , comment = #{comment}
-          , teacher_num = #{teacherNum}
-          , open_time = #{openTime}
-          , close_time = #{closeTime}
-          , address = #{address}
-          , aca_pic = #{acaPic}
+           SET user_id = #{userId}
+             , dong_id = #{dongId}
+             , aca_name = #{acaName}
+             , aca_phone = #{acaPhone}
+             , comment = #{comment}
+             , teacher_num = #{teacherNum}
+             , open_time = #{openTime}
+             , close_time = #{closeTime}
+             , address = #{address}
+             , aca_pic = #{acaPic}
     </insert>
+    
+    <update id="updAcademy">
+        UPDATE academy
+        <set>
+            <if test="acaName != null and acaName = ''">
+                aca_name = #{acaName}
+            </if>
+            <if test="acaPhone != null and acaPhone = ''">
+                , acaPhone = #{acaPhone}
+            </if>
+            <if test="comment != null and comment = ''">
+                , comment = #{comment}
+            </if>
+            <if test="teacherNum != null and teacherNum = ''">
+                , teacherNum = #{teacherNum}
+            </if>
+            <if test="openTime != null and openTime = ''">
+                , openTime = #{openTime}
+            </if>
+            <if test="closeTime != null and closeTime = ''">
+                , closeTime = #{closeTime}
+            </if>
+            <if test="acaPic != null and acaPic = ''">
+                , acaPic = #{acaPic}
+            </if>
+        </set>
+        WHERE acaId = #{acaId}
+    </update>
+
+    <delete id="delAcademy">
+        DELETE FROM academy
+         WHERE aca_id = #{acaId}
+           AND user_id = #{userId}
+    </delete>
 
 </mapper>
