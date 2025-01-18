@@ -43,10 +43,13 @@ public class AcademyPostReq {
     @Schema(title = "학원사진")
     private String acaPic;
 
-    /*@Schema(title = "수강 연령대")
-    private String ageRange;
-    @Schema(title = "수준")
-    private String level;
-    @Schema(title = "요일")
-    private List<String> date;*/
+    @Schema(title = "수강 연령대 리스트")
+    private List<Long> ageRangeIdList;
+    @Schema(title = "수준 리스트")
+    private List<Long> levelIdList;
+    @Schema(title = "요일 리스트")
+    private List<Long> daysIdList;
+
+    @Schema(title = "태그Id 리스트")
+    private List<Long> tagIdList;
 }

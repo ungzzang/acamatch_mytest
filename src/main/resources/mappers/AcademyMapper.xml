@@ -5,6 +5,71 @@
 
 <mapper namespace="com.green.acamatch_mytest.academy.AcademyMapper">
 
+<!--카테고리 select-->
+    <select id="selAgeRangeList">
+        SELECT *
+        FROM ageRange
+    </select>
+
+    <select id="selLevelList">
+        SELECT *
+        FROM level
+    </select>
+
+    <select id="selDaysList">
+        SELECT *
+        FROM days
+    </select>
+
+<!--태그 select-->
+    <select id="selTagList">
+        SELECT tag_id as tagId,tag_name as tagName
+        FROM tag
+        <where>
+            <if test="searchTag != null and searchTag != ''">
+                tag_name LIKE CONCAT('%', #{searchTag}, '%')
+            </if>
+        </where>
+    </select>
+
+
+
+<!--카테고리 학원등록-->
+    <insert id="insAcaAgeRange">
+        INSERT INTO academyAgeRange (aca_id, age_range_id)
+        VALUES
+        <foreach collection="ageRangeIdList" item="ageRangeId" separator=",">
+            (#{acaId}, #{ageRangeId})
+        </foreach>
+    </insert>
+
+    <insert id="insAcaLevel">
+        INSERT INTO academyLevel (aca_id, level_id)
+        VALUES
+        <foreach collection="levelIdList" item="levelId" separator=",">
+            (#{acaId}, #{levelId})
+        </foreach>
+    </insert>
+
+    <insert id="insAcaDays">
+        INSERT INTO academyLevel (aca_id, days_id)
+        VALUES
+        <foreach collection="daysIdList" item="daysId" separator=",">
+            (#{acaId}, #{daysId})
+        </foreach>
+    </insert>
+    
+<!--태그 학원등록-->
+    <insert id="insAcaTag">
+        INSERT INTO academytag (aca_id, tag_id)
+        VALUES
+        <foreach collection="tagIdList" item="tagId" separator=",">
+            (#{acaId}, #{tagId})
+        </foreach>
+    </insert>
+
+
+<!--학원정보등록-->
     <insert id="insAcademy" useGeneratedKeys="true" keyProperty="acaId">
         INSERT INTO academy
            SET user_id = #{userId}
@@ -18,7 +83,10 @@
              , address = #{address}
              , aca_pic = #{acaPic}
     </insert>
-    
+
+
+
+<!--학원정보수정-->
     <update id="updAcademy">
         UPDATE academy
         <set>
@@ -50,6 +118,7 @@
         WHERE aca_id = #{acaId}
     </update>
 
+<!--학원정보삭제-->
     <delete id="delAcademy">
         DELETE FROM academy
          WHERE aca_id = #{acaId}

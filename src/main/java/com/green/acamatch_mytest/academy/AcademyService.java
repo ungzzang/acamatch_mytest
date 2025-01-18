@@ -4,14 +4,17 @@ import com.green.acamatch_mytest.academy.model.AcademyDeleteReq;
 import com.green.acamatch_mytest.academy.model.AcademyPostReq;
 import com.green.acamatch_mytest.academy.model.AcademyUpdateReq;
 import com.green.acamatch_mytest.academy.model.UserMessage;
+import com.green.acamatch_mytest.academy.model.category.CategoryGetAgeRangeRes;
+import com.green.acamatch_mytest.academy.model.category.CategoryGetDaysRes;
+import com.green.acamatch_mytest.academy.model.category.CategoryGetLevelRes;
 import com.green.acamatch_mytest.common.MyFileUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -21,9 +24,46 @@ public class AcademyService {
     private final MyFileUtils myFileUtils;
     private final UserMessage userMessage;
 
+    //카테고리 select
+    public List<CategoryGetAgeRangeRes> categoryAgeRangeResList() {
+        List<CategoryGetAgeRangeRes> list = academyMapper.selAgeRangeList();
+        return list;
+    }
+
+    public List<CategoryGetLevelRes> categoryLevelResList() {
+        List<CategoryGetLevelRes> list = academyMapper.selLevelList();
+        return list;
+    }
+
+    public List<CategoryGetDaysRes> categoryDaysResList() {
+        List<CategoryGetDaysRes> list = academyMapper.selDaysList();
+        return list;
+    }
+
+    //학원이 등록한 카테고리 insert
+    public int insAcaAgeRange(AcademyPostReq req) {
+        int result = academyMapper.insAcaAgeRange(req);
+        return result;
+    }
+
+    public int insAcaLevel(AcademyPostReq req) {
+        int result = academyMapper.insAcaLevel(req);
+        return result;
+    }
+
+    public int insAcaDays(AcademyPostReq req) {
+        int result = academyMapper.insAcaDays(req);
+        return result;
+    }
+
+    //학원이 등록한 태그 insert
+    public int insAcaTag(AcademyPostReq req) {
+        int result = academyMapper.insAcaTag(req);
+        return result;
+    }
+
+
     public int insAcademy(MultipartFile pic, AcademyPostReq req) {
-
-
 
         String savedPicName = (pic != null ? myFileUtils.makeRandomFileName(pic) : null);
 
